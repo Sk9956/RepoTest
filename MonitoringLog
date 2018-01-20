@@ -14,3 +14,7 @@
 4_ Less Command - Display Real Time Output of Log Files
 
 	sudo less +F /var/log/log1.log
+
+5_ Lsof List Open File - List All Network Connections
+
+	lsof -i
