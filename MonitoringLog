@@ -1,0 +1,16 @@
+1_ Tail Command - Monitor Logs in Real Time
+	X a remplacer par le nombre de ligne a afficher
+	
+	sudo tail -nX -f /var/log/apache2/access.log
+
+2_ MultiTail Command - Monitor Multiple Log Files in Real Time 
+
+	sudo multitail /var/log/log1.log /var/log/log2.log
+
+3_ Inav Command - Monitor Multiple Log Files in Real Time
+
+	sudo inav /var/log/log1.log /var/log/log2.log
+
+4_ Less Command - Display Real Time Output of Log Files
+
+	sudo less +F /var/log/log1.log
