@@ -1,0 +1,81 @@
+nmcli is a tool that allows NetworkManager management from command line.
+============================================================================================================
+==== 1. NetworkManager status ==============================================================================
+============================================================================================================
+		Display overall status of NetworkManager
+$ nmcli general status
+
+		Display active connections
+$ nmcli connection show --active
+
+		Display all configured connections
+$ nmcli connection show configured
+
+============================================================================================================
+==== 2. Connect/disconnect to an already configured connection =============================================
+============================================================================================================		
+		Connect to a configured connection by name :
+$ nmcli connection up id <connection name>
+
+		Disconnection by name :
+$ nmcli connection down id <connection name>
+
+============================================================================================================
+==== 3. Wifi ===============================================================================================
+============================================================================================================
+		Get Wifi status
+$ nmcli radio wifi
+
+		Turn wifi on or off
+$ nmcli radio wifi <on|off>
+
+		List available access points(AP) to connect to
+$ nmcli device wifi list
+
+		Refresh previous list
+$ nmcli device wifi rescan
+
+		Create a new connection to an open AP
+$ nmcli device wifi connect <SSID|BSSID>
+
+		Create a new connection to a password protected AP
+$ nmcli device wifi connect <SSID|BSSID> password <password>
+
+============================================================================================================
+==== 4. Network interfaces =================================================================================
+============================================================================================================
+		List available devices and their status
+$ nmcli device status
+
+		Disconnect an interface
+$ nmcli device disconnect iface <interface>
+
+		To create or modify a new connection using an interactive editor
+$ nmcli connection edit con-name <name of new connection>
+
+		To edit an already existing connection using an interactive editor
+$ nmcli connection edit <connection name>
+
+============================================================================================================
+==== 6. Manually editing ===================================================================================
+============================================================================================================
+To manually edit a ifcfg connection configuration open or create with a text editor the configuration file of the connection located in "/etc/sysconfig/network-scripts/ifcfg-<connection name>"
+A description of most common configuration options is available at: http://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html
+
+	To modify a connection password open with a text editor and edit the file "keys-<connection id>" located in "/etc/sysconfig/network-scripts/". The password is stored in plain text. For example
+
+$ cat /etc/sysconfig/network-scripts/keys-<connection name>
+WPA_PSK='password'
+
+	Or if using keyfile, simply edit the connection file located inside "/etc/NetworkManager/system-connections/"
+	Finally save the files and to apply changes to an already active connection execute
+
+$ nmcli connection up id <connection name>
+
+	Delete a connection configuration
+
+$ nmcli connection delete id <connection name>
+
+To see all available options for your version of nmcli
+
+$ info nmcli
